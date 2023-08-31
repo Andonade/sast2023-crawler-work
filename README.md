@@ -20,7 +20,7 @@ pip install -r requirements.txt
 
 请在**config.json**中对应处填入你访问教参网站的Cookie以及想要爬取教材的BookId[^1]。
 
-[^1]: BookId可以在教参网站上教材详情页的url中找到，如[《计算机组成原理》](http://reserves.lib.tsinghua.edu.cn/Search/BookDetail?bookId=ca0dfa6c-339e-4d95-8be4-769d8578164c)，其中"bookId="后内容即为BookId
+[^1]: BookId可以在教参网站上教材详情页的url中找到，如[《大学物理学. 力学、热学（第4版》](http://reserves.lib.tsinghua.edu.cn/Search/BookDetail?bookId=ca0dfa6c-339e-4d95-8be4-769d8578164c)，其中"bookId="后内容即为BookId
 
 然后使用以下命令运行：
 

@@ -30,11 +30,11 @@ def get_pic(url_list):
     return filenames
 
 
-def pic2pdf(filenames):
+def pic2pdf(filenames, bookName):
     im_list = []
     for filename in tqdm(filenames, desc="Converting to PDF"):
         im_list.append(Image.open(filename).convert("RGB"))
-    im_list[0].save("output.pdf", save_all=True, append_images=im_list[1:])
+    im_list[0].save(f"{bookName}.pdf", save_all=True, append_images=im_list[1:])
 
 
 if __name__ == "__main__":
@@ -45,12 +45,14 @@ if __name__ == "__main__":
                "Cookie": config["Cookie"]}
     url = f"http://reserves.lib.tsinghua.edu.cn/Search/BookDetail?bookId={bookId}"
     res = requests.get(url, headers=headers)
-    cate_soup = bs(res.text, "lxml")
-    category = cate_soup.find("table").find_next_sibling().find_next_sibling().find_all("a")
+    soup = bs(res.text, "lxml")
+    table = soup.find("table")
+    category = table.find_next_sibling().find_next_sibling().find_all("a")
+    bookName = table.find_all("b")[1].text.strip()
     url_list = []
     for part in category:
         part_url = f"http://reserves.lib.tsinghua.edu.cn{part['href']}"
         part_url = re.sub(r"index.html", "files/mobile/", part_url)
         url_list.append(part_url)
-    pic2pdf(get_pic(url_list))
+    pic2pdf(get_pic(url_list), bookName)
     os.system("rm -rf pic")

@@ -30,11 +30,11 @@ def get_pic(url_list):
     return filenames
 
 
-def pic2pdf(filenames, bookName):
+def pic2pdf(filenames, book_name):
     im_list = []
     for filename in tqdm(filenames, desc="Converting to PDF"):
         im_list.append(Image.open(filename).convert("RGB"))
-    im_list[0].save(f"{bookName}.pdf", save_all=True, append_images=im_list[1:])
+    im_list[0].save(f"{book_name}.pdf", save_all=True, append_images=im_list[1:])
 
 
 if __name__ == "__main__":

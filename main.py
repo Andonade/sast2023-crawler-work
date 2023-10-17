@@ -8,6 +8,11 @@ from PIL import Image
 
 
 def get_pic(url_list):
+    """
+    download pictures from url_list.
+    :param url_list: list of url for pictures
+    :return: list of picture filenames
+    """
     filenames = []
     if not os.path.exists("pic"):
         os.mkdir("pic")
@@ -31,6 +36,12 @@ def get_pic(url_list):
 
 
 def pic2pdf(filenames, book_name):
+    """
+    convert pictures to pdf.
+    :param filenames: list of picture filenames
+    :param book_name: name of the book
+    :return: None
+    """
     im_list = []
     for filename in tqdm(filenames, desc="Converting to PDF"):
         im_list.append(Image.open(filename).convert("RGB"))
